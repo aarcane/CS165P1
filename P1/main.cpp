@@ -3,6 +3,6 @@
 
 int main (int argc, char** argv)
 {
-	doalg(50,5);
+	doalg(15,3);
 	return 0;
 }

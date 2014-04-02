@@ -1,5 +1,6 @@
 #ifndef DOALG_H
 #define DOALG_H
-int doalg( int n, int k);
-
+int doalg(const int n, const int k);
+void heapify (const int argc, int * argv);
+void findLargest (const int n, const int k, int * argv);
 #endif
