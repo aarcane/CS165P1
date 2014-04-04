@@ -1,7 +1,7 @@
 CXX=g++
 CC=gcc
 LD=g++
-CXXFLAGS=$(CFLAGS)
+CXXFLAGS=$(CFLAGS) -std=c++11
 CFLAGS=-c -Wall -Werror -O3
 LDFLAGS=
 CXXSOURCES=main.cpp doalg.cpp

@@ -12,10 +12,10 @@ int doalg(const int n, const int k)
 	// Meat of stuff goes here.
 	heapify(k, Best);
 	findLargest(n, k, Best);
-	sort(k, Best);
+	Sort(k, Best);
 	//Cleanup and returns.
 
-	ret = COMPARE(-1, k, Best); //better return a positive value.
+	ret = 1; //COMPARE(-1, k, Best); //better return a positive value.
 	delete[] Best;
 	return ret;
 }
@@ -28,7 +28,7 @@ void heapify (const int argc, int * argv)
 
 // Iterate through hidden array in COMPARE from k+1 to n and find k largest values.
 void findLargest (const int n, const int k, int * argv)
-{
+{	std::swap(argv[1], argv[2]);
 
 }
 
