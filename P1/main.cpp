@@ -32,11 +32,11 @@ public:
 
 int main (int argc, char** argv)
 {	testrun t[] = {
-		{15, 3, 1000}, 
-		{100, 10, 1000},
-		{1000, 20, 1000},
-		{10000, 40, 1000} };
-	int numtests = 4;
+        //	{15, 3, 1000}, 
+                //	{100, 10, 1000},
+                //	{1000, 20, 1000},
+		{10, 3, 1} };
+	int numtests = 1;
 	for(int i = 0; i < numtests; ++i) std::cout << *(t[i].run()) << std::endl;
 	return 0;
 }
