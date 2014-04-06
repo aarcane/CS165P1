@@ -1,8 +1,8 @@
 #include <iostream>
 #include <climits>
-#include <cstring>
 #include <vector>
 #include "doalg.h"
+
 class testrun
 {	int datasize;
 	int ksize;
@@ -31,7 +31,8 @@ public:
 	{	stream << "Testrun: (" << t.datasize << "," << t.ksize << ") " << t.numruns << " runs.  Avg: " << t.avg << " Min: " << t.min << " Max: " << t.max;
 		return stream;
 }	};
-std::string usage = ": read README.txt";
+
+
 int main (int argc, char** argv)
 {	testrun defaulttests[] = {
 		{15, 3, 1000}, 
@@ -39,6 +40,7 @@ int main (int argc, char** argv)
 		{1000, 20, 1000},
 		{10000, 40, 1000} };
 	int defaultnumtests = 4;
+	std::string usage = ": read README.txt";
 	std::vector<testrun> t;
 	
 	if(argc == 1)
