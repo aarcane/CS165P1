@@ -37,3 +37,33 @@ void Sort (const int k, int * argv)
 {
 
 }
+
+void percDown( const int k, int n, int * argv)
+{	if(n >= k) return;
+	if((n*2) >= k) return;
+	int cmp = n*2;
+	int c = 0;
+	if(((n*2)+1) <k)
+	{	c = COMPARE(argv[2*n], argv[(2*n)+1]);
+		if(c == -1) {/* index out of bounds.  why? */}
+		else if (c == 1) /* y is a better cmp */
+		{	cmp = (n*2)+1;
+		}
+		else if (c == 2) { /* cmp is already best option */}
+		else {/* unspecified error. */}
+	}
+	c = COMPARE(argv[n], argv[cmp]);
+	if(c == -1) {/* index out of bounds.  why? */}
+	else if (c == 1) /* swap n and cmp, recurse */
+	{	std::swap(n, cmp);
+		percDown(k, cmp, argv);
+	}
+	else if (c == 2) {/* n is already in proper order.*/}
+	else {/* unspecified error. */}
+	return;
+
+}
+/*	COMPARE( x,y ) compares values of array[x] and array[y]	*/
+/*		returns  1 if array[x] > array[y]		*/
+/*		returns  2 if array[y] > array[x]		*/
+/*		returns -1 if x or y is out of range		*/
