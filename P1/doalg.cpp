@@ -38,7 +38,7 @@ void Sort (const int k, int * argv)
 
 }
 
-void percDown( const int k, int n, int * argv)
+void percDown(const int k, const int n, int * argv)
 {	if(n >= k) return;
 	if((n*2) >= k) return;
 	int cmp = n*2;
