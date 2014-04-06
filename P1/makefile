@@ -10,6 +10,7 @@ CXXOBJECTS=$(CXXSOURCES:.cpp=.o)
 COBJECTS=$(CSOURCES:.c=.o)
 OBJECTS=$(COBJECTS) $(CXXOBJECTS)
 EXECUTABLE=doalg
+.PHONY=test
 
 all: $(SOURCES) $(EXECUTABLE)
 	
@@ -23,3 +24,6 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(CFLAGS) $< -o $@
 clean:
 	rm *.o $(EXECUTABLE)
+
+test: $(EXECUTABLE)
+	./doalg
