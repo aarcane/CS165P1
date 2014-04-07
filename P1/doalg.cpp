@@ -39,15 +39,15 @@ void Sort (const int k, int * argv)
 }
 
 void percDown(const int k, const int n, int * argv)
-{	if(n >= k) return;
-	if((n*2) >= k) return;
-	int cmp = n*2;
+{	int cmp = n*2;
 	int c = 0;
-	if(((n*2)+1) <k)
-	{	c = COMPARE(argv[2*n], argv[(2*n)+1]);
+	if(n > k) return;
+	if(cmp > k) return;
+	if((cmp+1) <= k)
+	{	c = COMPARE(argv[cmp], argv[cmp+1]);
 		if(c == -1) {/* index out of bounds.  why? */}
 		else if (c == 1) /* y is a better cmp */
-		{	cmp = (n*2)+1;
+		{	cmp += 1;
 		}
 		else if (c == 2) { /* cmp is already best option */}
 		else {/* unspecified error. */}
@@ -69,15 +69,14 @@ void percDown(const int k, const int n, int * argv)
 /*		returns -1 if x or y is out of range		*/
 
 void percDown2(const int k, int n, int* argv)
-{	int cmp; = n*2;
-	int c; = 0;
-	while(cmp < k && n < k)
-	{	if(cmp+1 < k) cmp=(1==COMPARE(argv[cmp], argv[cmp+1]))?cmp+1:cmp;
-		if(1==COMPARE(arv[n], argv[cmp]))
+{	int cmp = n*2;
+	while(cmp <= k && n <= k)
+	{	if(cmp+1 <= k) cmp=(1==COMPARE(argv[cmp], argv[cmp+1]))?cmp+1:cmp;
+		if(1==COMPARE(argv[n], argv[cmp]))
 		{	std::swap(argv[n], argv[cmp]);
-			n = cmp;
+			n = cmp; // recurse, if applicable.
 		}
-		else return;
+		else return; // actually done.  Don't recurse.
 	}
 	return;
 }
