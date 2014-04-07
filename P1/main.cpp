@@ -1,6 +1,7 @@
 #include <iostream>
 #include <climits>
 #include <vector>
+#include <iomanip>
 #include "doalg.h"
 
 class testrun
@@ -9,7 +10,7 @@ class testrun
 	int numruns;
 	int min = INT_MAX;
 	int max = 0;
-	int avg = 0;
+	double avg = 0.0f;
 	
 public:
 	testrun(int d, int k, int n) : 
@@ -28,7 +29,7 @@ public:
 		return this;
 	}
 	friend std::ostream& operator<< (std::ostream& stream, const testrun& t)
-	{	stream << "Testrun: (" << t.datasize << "," << t.ksize << ") " << t.numruns << " runs.  Avg: " << t.avg << " Min: " << t.min << " Max: " << t.max;
+	{	stream << std::fixed << std::setprecision(3) << "Testrun: (" << t.datasize << "," << t.ksize << ") " << t.numruns << " runs.  Avg: " << t.avg << " Min: " << t.min << " Max: " << t.max;
 		return stream;
 }	};
 

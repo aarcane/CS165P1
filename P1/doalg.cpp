@@ -55,7 +55,7 @@ void percDown(const int k, const int n, int * argv)
 	c = COMPARE(argv[n], argv[cmp]);
 	if(c == -1) {/* index out of bounds.  why? */}
 	else if (c == 1) /* swap n and cmp, recurse */
-	{	std::swap(n, cmp);
+	{	std::swap(argv[n], argv[cmp]);
 		percDown(k, cmp, argv);
 	}
 	else if (c == 2) {/* n is already in proper order.*/}
