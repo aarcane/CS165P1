@@ -18,31 +18,23 @@ int doalg(const int n, const int k)
             Best[i] = i; //initialize Best to first N values.
           }
          std::cout << "---------------: " << std::endl; 
-
-	int * Rest = new int[n-k+1]; // stores indices of k - n
-        int indexOffset = k+1; 
-        
-         std::cout << "REST CONTAINS: " << std::endl; 
-        for(int i= 1; i<=n-k; i++)
-          {
-            std::cout << indexOffset << std::endl;
-            Rest[i] = indexOffset; //initialize Rest to array[n-k+1] to array[n]
-            indexOffset ++; 
-          }
-        std::cout << "---------------: " << std::endl; 
         
         
 	COMPARE(0,n); //allocate hidden array
-	
+        std::cout << COMPARE(1,2);
+        std::cout << COMPARE(1,3);
+        std::cout << COMPARE(2,3);
+        std::cout << COMPARE(3,3);
+        //COMPARE(
+        std::cout << "n: " << n << std::endl;	
 	// Meat of stuff goes here.
 	heapify(k, Best);
-	findLargest(n, k, Best, Rest);
+	findLargest(n, k, Best);
 	Sort(k, Best);
 	//Cleanup and returns.
 
 	ret = 1; //COMPARE(-1, k, Best); //better return a positive value.
 	delete[] Best;
-        delete[] Rest; 
 	return ret;
 }
 // Struct for overloading default comparator in priority_queue
@@ -51,14 +43,16 @@ struct compare
   bool operator()(const int& l, const int& r)  
   {  
     int compareRet = COMPARE(l, r); 
+    std::cout << "l: " << l << " r: " << r << " c: " << compareRet;
     if (compareRet == -1)
     {
-      std::cout << "x or y out of range" << std::endl;
+      std::cout << " x or y out of range c: " << compareRet;
     }
     else if (compareRet == 2) // r > l
-    {
+      {  std::cout << std::endl;
       return false; 
     } 
+    std::cout << std::endl;
     return true; // l > r
   }
 };
@@ -73,7 +67,7 @@ void heapify (const int argc, int * argv)
   // Push elements onto MinHeap
   for(int i = 1; i <= argc; i ++)
   {
-    minHeap.push(i);
+    minHeap.push(argv[i]);
   }
   /*
   std::cout << " MINHEAP ELEMENTS " << std::endl; 
@@ -87,7 +81,7 @@ void heapify (const int argc, int * argv)
 }
 
 // Iterate through hidden array in COMPARE from k+1 to n and find k largest values.
-void findLargest (const int n, const int k, int * argv, int * Rest)
+void findLargest (const int n, const int k, int * argv)
 { 
   //For each element, after the kth element (arr[k] to arr[n-1]), compare it with root of MH.
   //……a) If the element is greater than the root then make it root and call heapify for MH
@@ -96,9 +90,9 @@ void findLargest (const int n, const int k, int * argv, int * Rest)
   //Compare root of MH to Best[] to find largest
   
    int compareRet = 0; 
-   for(int i = 1; i <= n-k; i ++)
+   for(int i = k; i <= n; ++i)
     {
-      compareRet = COMPARE(Rest[i], minHeap.top());
+      compareRet = COMPARE(i, minHeap.top());
       
       if(compareRet == -1)//x and y are not in range
       {
@@ -107,13 +101,13 @@ void findLargest (const int n, const int k, int * argv, int * Rest)
       else if(compareRet == 1) // element is greater, make it root
       {
         minHeap.pop();
-        minHeap.push(Rest[i]);
+        minHeap.push(i);
       }
     }
 
-   for(int i = 1; i <= k; i ++)
+   for(int i = 1; i <= k; ++i)
    {
-     argv[i] = minHeap.top();
+     argv[k-i+1] = minHeap.top();
      minHeap.pop();
    }
    std::cout << "CHECK BEST" << std::endl; 
