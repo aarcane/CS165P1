@@ -11,29 +11,17 @@ int doalg(const int n, const int k)
 	int ret = 0;
 	int * Best = new int [k+1]; // stores indices of first k
         
-        std::cout << "BEST CONTAINS: " << std::endl; 
-	for(int i=1; i<=k;++i) 
-          {
-            std::cout << i << std::endl; 
-            Best[i] = i; //initialize Best to first N values.
-          }
-         std::cout << "---------------: " << std::endl; 
-        
+	for(int i=1; i<=k;++i) Best[i] = i; //initialize Best to first N values.
         
 	COMPARE(0,n); //allocate hidden array
-        std::cout << COMPARE(1,2);
-        std::cout << COMPARE(1,3);
-        std::cout << COMPARE(2,3);
-        std::cout << COMPARE(3,3);
-        //COMPARE(
-        std::cout << "n: " << n << std::endl;	
+
 	// Meat of stuff goes here.
 	heapify(k, Best);
 	findLargest(n, k, Best);
 	Sort(k, Best);
 	//Cleanup and returns.
 
-	ret = 1; //COMPARE(-1, k, Best); //better return a positive value.
+	ret = COMPARE(-1, k, Best); //better return a positive value.
 	delete[] Best;
 	return ret;
 }
@@ -43,16 +31,16 @@ struct compare
   bool operator()(const int& l, const int& r)  
   {  
     int compareRet = COMPARE(l, r); 
-    std::cout << "l: " << l << " r: " << r << " c: " << compareRet;
+    //std::cout << "l: " << l << " r: " << r << " c: " << compareRet;
     if (compareRet == -1)
     {
-      std::cout << " x or y out of range c: " << compareRet;
+      std::cout << " x or y out of range c: " << compareRet << std::endl;
     }
     else if (compareRet == 2) // r > l
-      {  std::cout << std::endl;
+      {  //std::cout << std::endl;
       return false; 
     } 
-    std::cout << std::endl;
+    //std::cout << std::endl;
     return true; // l > r
   }
 };
@@ -90,7 +78,7 @@ void findLargest (const int n, const int k, int * argv)
   //Compare root of MH to Best[] to find largest
   
    int compareRet = 0; 
-   for(int i = k; i <= n; ++i)
+   for(int i = k+1; i <= n; ++i)
     {
       compareRet = COMPARE(i, minHeap.top());
       
@@ -107,11 +95,11 @@ void findLargest (const int n, const int k, int * argv)
 
    for(int i = 1; i <= k; ++i)
    {
-     argv[k-i+1] = minHeap.top();
+     argv[minHeap.size()] = minHeap.top();
      minHeap.pop();
    }
-   std::cout << "CHECK BEST" << std::endl; 
-   std::cout << COMPARE(-1, k, argv) << std::endl; 
+   //std::cout << "CHECK BEST" << std::endl; 
+   //std::cout << COMPARE(-1, k, argv) << std::endl; 
    
   
 }
