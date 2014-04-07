@@ -67,3 +67,17 @@ void percDown(const int k, const int n, int * argv)
 /*		returns  1 if array[x] > array[y]		*/
 /*		returns  2 if array[y] > array[x]		*/
 /*		returns -1 if x or y is out of range		*/
+
+void percDown2(const int k, int n, int* argv)
+{	int cmp; = n*2;
+	int c; = 0;
+	while(cmp < k && n < k)
+	{	if(cmp+1 < k) cmp=(1==COMPARE(argv[cmp], argv[cmp+1]))?cmp+1:cmp;
+		if(1==COMPARE(arv[n], argv[cmp]))
+		{	std::swap(argv[n], argv[cmp]);
+			n = cmp;
+		}
+		else return;
+	}
+	return;
+}
