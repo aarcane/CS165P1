@@ -114,7 +114,7 @@ void Sort (const int k, int * argv)
 	}
 }
 
-void percDown(const int k, int n, int* argv)
+void percDown2(const int k, int n, int* argv)
 {	int cmp = n*2;
 	while(cmp<=k && n<=k)
 	{	cmp=((1+cmp)<=k && 1==COMPARE(argv[cmp], argv[(1+cmp)]))?(1+cmp):cmp;
@@ -124,6 +124,32 @@ void percDown(const int k, int n, int* argv)
 			cmp *= 2;
 		}
 		else return; // actually done.  Don't recurse.
+	}
+	return;
+}
+
+// Implement a D heap with compile time constants D and Dc.  Dc should always be D-2.  D is any number >= 1.  
+// Experimentation shows that the comparison count results grow using D > 2.  Presumably this growth is unbounded,
+// but slow. This is because of the first loop where COMPARE is called on each child.  Because our depth is low,
+// we're always going to hit this for our samples.  If we had a percUp function implemented, and used I believe
+// we would see greatly improved results using a D heap with D = some low prime (application dependent).
+const int D = 2;
+const int Dc = D-2;
+void percDown(const int k, int n, int* argv)
+{	int cmp = (n*D)-Dc;
+	while(cmp<=k && n<=k)
+	{	int cMin = cmp+1;
+		const int cMax = std::min(cmp+D, k+1);
+		while(cMin < cMax)
+		{	cmp=(1==COMPARE(argv[cmp], argv[cMin]))?cMin:cmp;
+			++cMin;
+		}
+		if(1==COMPARE(argv[n],argv[cmp]))
+		{	std::swap(argv[n], argv[cmp]);
+			n=cmp;
+			cmp = (n*D)-Dc;
+		}
+		else return;
 	}
 	return;
 }
